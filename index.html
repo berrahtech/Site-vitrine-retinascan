@@ -1,5 +1,13 @@
 <title>RetinaScan — Dépistage rétinien assisté par IA</title>
 
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon-180.png">
+<meta property="og:title" content="RetinaScan — Dépistage rétinien assisté par IA">
+<meta property="og:description" content="Voir au-delà, diagnostiquer avec précision. Une simple photo du fond d’œil, analysée en moins d’une minute.">
+<meta property="og:image" content="assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
 <style>
   /* ------------------------------------------------------------------ *
    * Jetons — thème sombre par défaut (identité de marque), thème clair
@@ -167,7 +175,10 @@
   header.nav.scrolled { border-color: var(--border); }
   .nav-inner { display: flex; align-items: center; justify-content: space-between; height: 68px; }
   .brand { display: flex; align-items: center; gap: 11px; font-size: 20px; }
-  .brand .mark { width: 34px; height: 34px; flex: none; }
+  .brand .mark {
+    width: 38px; height: 38px; flex: none; display: block; object-fit: contain;
+    filter: drop-shadow(0 2px 10px rgba(124, 58, 237, 0.45));
+  }
   .nav-links { display: flex; align-items: center; gap: 30px; }
   .nav-links a { color: var(--muted); font-size: 15px; font-weight: 500; transition: color 0.2s; }
   .nav-links a:hover { color: var(--text); }
@@ -444,7 +455,9 @@
 <header class="nav" id="nav">
   <div class="wrap nav-inner">
     <a class="brand" href="#top" aria-label="RetinaScan, accueil">
-      <span class="mark" id="navMark" aria-hidden="true"></span>
+      <img class="mark" src="assets/logo-mark.png"
+           srcset="assets/logo-mark.png 1x, assets/logo-mark@2x.png 2x"
+           width="38" height="38" alt="" aria-hidden="true">
       <span class="wordmark">Retina<span class="scan">Scan</span></span>
     </a>
     <nav class="nav-links" aria-label="Principale">
@@ -733,7 +746,9 @@
     <div class="foot-grid">
       <div class="foot-brand">
         <a class="brand" href="#top" aria-label="RetinaScan">
-          <span class="mark" id="footMark" aria-hidden="true"></span>
+          <img class="mark" src="assets/logo-mark.png"
+               srcset="assets/logo-mark.png 1x, assets/logo-mark@2x.png 2x"
+               width="36" height="36" alt="" aria-hidden="true" style="width:36px;height:36px">
           <span class="wordmark" style="font-size:19px">Retina<span class="scan">Scan</span></span>
         </a>
         <p>Voir au-delà, diagnostiquer avec précision. Le dépistage de la rétinopathie diabétique, à portée de main.</p>
@@ -773,29 +788,7 @@
     "use strict";
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    /* ---- Marque « œil » en SVG (nav + pied) ---- */
-    function eyeMark(size) {
-      var uid = "g" + Math.random().toString(36).slice(2, 7);
-      return (
-        '<svg viewBox="0 0 120 88" width="' + size + '" height="' + (size * 88 / 120) +
-        '" xmlns="http://www.w3.org/2000/svg" style="display:block">' +
-        '<defs><radialGradient id="' + uid + '" cx="42%" cy="38%" r="65%">' +
-        '<stop offset="0" stop-color="#E9D5FF"/><stop offset="0.42" stop-color="#C084FC"/>' +
-        '<stop offset="0.78" stop-color="#7C3AED"/><stop offset="1" stop-color="#4C1D95"/>' +
-        '</radialGradient></defs>' +
-        '<circle cx="60" cy="44" r="27" fill="url(#' + uid + ')"/>' +
-        '<circle cx="60" cy="44" r="10.5" fill="#0B0512"/>' +
-        '<circle cx="55.5" cy="39.5" r="3.2" fill="#fff" opacity="0.55"/>' +
-        '<path d="M84 30 A27 27 0 0 1 84 58" fill="none" stroke="#C084FC" stroke-width="2.4" stroke-linecap="round" stroke-dasharray="2 5"/>' +
-        '<path d="M6 44 Q60 2 114 44 Q60 86 6 44 Z" fill="none" stroke="#7C3AED" stroke-width="5" stroke-linejoin="round"/>' +
-        '<path d="M92 44 h6 l3 -9 4 18 3 -9 h6" fill="none" stroke="#7C3AED" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>' +
-        "</svg>"
-      );
-    }
-    var nm = document.getElementById("navMark");
-    var fm = document.getElementById("footMark");
-    if (nm) nm.innerHTML = eyeMark(34);
-    if (fm) fm.innerHTML = eyeMark(32);
+    /* La marque « œil » du nav et du pied est le logo réel (assets/logo-mark.png). */
 
     /* ---- Scanner du héros ---- */
     var host = document.getElementById("scanner");
